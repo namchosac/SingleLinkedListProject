@@ -329,7 +329,6 @@ namespace SingleLinkedListProject
                         r.Link = q;
                     }
                     else
-                        // if (p == _start)
                     {
                         _start = q;
                     }
