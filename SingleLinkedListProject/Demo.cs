@@ -6,10 +6,7 @@ namespace SingleLinkedListProject
     {
         public static void Main(string[] args)
         {
-            if (args is null)
-            {
-                throw new ArgumentNullException(nameof(args));
-            }
+            // if (args == null) throw new ArgumentNullException(nameof(args));
 
             var list1 = new SingleLinkedList();
             var list2 = new SingleLinkedList();
