@@ -157,7 +157,7 @@ namespace SingleLinkedListProject
             // x is in first node, new node is inserted before first node
             if (x == _start.Info)
             {
-                temp = new Node(data) {Link = _start};
+                temp = new Node(data) { Link = _start };
                 _start = temp;
                 return;
             }
@@ -342,7 +342,7 @@ namespace SingleLinkedListProject
 
         public SingleLinkedList Merge2(SingleLinkedList list)
         {
-            var mergeList = new SingleLinkedList {_start = Merge2(_start, list._start)};
+            var mergeList = new SingleLinkedList { _start = Merge2(_start, list._start) };
             return mergeList;
         }
 
@@ -384,7 +384,35 @@ namespace SingleLinkedListProject
 
         internal void MergeSort()
         {
-            throw new NotImplementedException();
+            _start = MergeSortRec(_start);
+        }
+
+        private Node MergeSortRec(Node listStart)
+        {
+            if (listStart == null || listStart.Link == null) //if list empty or has one element
+                return listStart;
+
+            //if more than one element
+            Node start1 = listStart;
+            Node start2 = DivideList(listStart);
+            start1 = MergeSortRec(start1);
+            start2 = MergeSortRec(start2);
+            Node startM = Merge2(start1, start2);
+            return startM;
+        }
+
+        private Node DivideList(Node p)
+        {
+            Node q = p.Link.Link;
+            while (q != null && q.Link != null)
+            {
+                p = p.Link;
+                q = q.Link.Link;
+            }
+
+            Node start2 = p.Link;
+            p.Link = null;
+            return start2;
         }
 
         internal void InsertCycle(int data)
