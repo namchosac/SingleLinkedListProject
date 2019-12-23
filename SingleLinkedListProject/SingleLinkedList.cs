@@ -2,7 +2,7 @@
 
 namespace SingleLinkedListProject
 {
-    internal class SingleLinkedList
+    public class SingleLinkedList
     {
         private Node _start;
 
@@ -83,7 +83,7 @@ namespace SingleLinkedListProject
             }
         }
 
-        internal void InsertInBeginning(int data)
+        public void InsertInBeginning(int data)
         {
             var temp = new Node(data)
             {
@@ -93,7 +93,7 @@ namespace SingleLinkedListProject
             _start = temp;
         }
 
-        internal void InsertAtEnd(int data)
+        public void InsertAtEnd(int data)
         {
             var temp = new Node(data);
             if (_start == null)
@@ -110,7 +110,7 @@ namespace SingleLinkedListProject
             p.Link = temp;
         }
 
-        internal void InsertAfter(int data, int x)
+        public void InsertAfter(int data, int x)
         {
             // If list is empty
             if (_start == null)
@@ -144,7 +144,7 @@ namespace SingleLinkedListProject
             }
         }
 
-        internal void InsertBefore(int data, int x)
+        public void InsertBefore(int data, int x)
         {
             Node temp;
             // If list is empty
@@ -157,7 +157,7 @@ namespace SingleLinkedListProject
             // x is in first node, new node is inserted before first node
             if (x == _start.Info)
             {
-                temp = new Node(data) { Link = _start };
+                temp = new Node(data) {Link = _start};
                 _start = temp;
                 return;
             }
@@ -186,7 +186,7 @@ namespace SingleLinkedListProject
             }
         }
 
-        internal void InsertAtPosition(int data, int k)
+        public void InsertAtPosition(int data, int k)
         {
             Node temp;
             int i;
@@ -221,7 +221,7 @@ namespace SingleLinkedListProject
             }
         }
 
-        internal void DeleteFirstNode()
+        public void DeleteFirstNode()
         {
             if (_start == null)
                 return;
@@ -229,7 +229,7 @@ namespace SingleLinkedListProject
             _start = _start.Link;
         }
 
-        internal void DeleteLastNode()
+        public void DeleteLastNode()
         {
             if (_start == null)
                 return;
@@ -246,7 +246,7 @@ namespace SingleLinkedListProject
             p.Link = null;
         }
 
-        internal void DeleteNode(int x)
+        public void DeleteNode(int x)
         {
             if (_start == null)
             {
@@ -280,7 +280,7 @@ namespace SingleLinkedListProject
             p.Link = p.Link.Link;
         }
 
-        internal void ReverseList()
+        public void ReverseList()
         {
             Node prev = null;
             var p = _start;
@@ -295,7 +295,7 @@ namespace SingleLinkedListProject
             _start = prev;
         }
 
-        internal void BubbleSortExData()
+        public void BubbleSortExData()
         {
             Node end, p;
             for (end = null; end != _start.Link; end = p)
@@ -311,7 +311,7 @@ namespace SingleLinkedListProject
             }
         }
 
-        internal void BubbleSortExLinks()
+        public void BubbleSortExLinks()
         {
             Node end;
             Node p;
@@ -342,7 +342,7 @@ namespace SingleLinkedListProject
 
         public SingleLinkedList Merge2(SingleLinkedList list)
         {
-            var mergeList = new SingleLinkedList { _start = Merge2(_start, list._start) };
+            var mergeList = new SingleLinkedList {_start = Merge2(_start, list._start)};
             return mergeList;
         }
 
@@ -382,7 +382,7 @@ namespace SingleLinkedListProject
             return startM;
         }
 
-        internal void MergeSort()
+        public void MergeSort()
         {
             _start = MergeSortRec(_start);
         }
@@ -415,19 +415,102 @@ namespace SingleLinkedListProject
             return start2;
         }
 
-        internal void InsertCycle(int data)
+        public void InsertCycle(int x)
         {
-            throw new NotImplementedException();
+            if (_start == null)
+            {
+                return;
+            }
+
+            Node p = _start, px = null, prev = null;
+            while (p != null)
+            {
+                if (p.Info == x)
+                {
+                    px = p;
+                }
+
+                prev = p;
+                p = p.Link;
+            }
+
+            if (px != null)
+            {
+                prev.Link = px;
+            }
+            else
+            {
+                Console.WriteLine(x + " not present in list");
+            }
         }
 
-        internal bool HasCycle()
+        public bool HasCycle()
         {
-            throw new NotImplementedException();
+            return FindCycle() != null;
         }
 
-        internal void RemoveCycle()
+        private Node FindCycle()
         {
-            throw new NotImplementedException();
+            if (_start?.Link == null)
+            {
+                return null;
+            }
+
+            Node slowR = _start, fastR = _start;
+            while (fastR?.Link != null)
+            {
+                slowR = slowR.Link;
+                fastR = fastR.Link.Link;
+                if (slowR == fastR)
+                {
+                    return slowR;
+                }
+            }
+
+            return null;
+        }
+
+        public void RemoveCycle()
+        {
+            var c = FindCycle();
+            if (c == null)
+            {
+                return;
+            }
+
+            Console.WriteLine("Node at which the cycle was detected is " + c.Info);
+
+            Node p = c, q = c;
+            var lenCycle = 0;
+            do
+            {
+                lenCycle++;
+                q = q.Link;
+            } while (p != q);
+
+            Console.WriteLine("Length of cycle is : " + lenCycle);
+
+            var lenRemList = 0;
+            p = _start;
+            while (p != q)
+            {
+                lenRemList++;
+                p = p.Link;
+                q = q.Link;
+            }
+
+            Console.WriteLine("Number of nodes not included in the cycle are: " + lenRemList);
+
+            var lengthList = lenCycle + lenRemList;
+            Console.WriteLine("Length of the list is : " + lengthList);
+
+            p = _start;
+            for (var i = 0; i < lengthList - 1; i++)
+            {
+                p = p.Link;
+            }
+
+            p.Link = null;
         }
     }
 }
