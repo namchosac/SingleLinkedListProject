@@ -8,6 +8,7 @@ namespace SingleLinkedListProject
         {
             // if (args == null) throw new ArgumentNullException(nameof(args));
 
+            /*
             var list1 = new SingleLinkedList();
             var list2 = new SingleLinkedList();
 
@@ -29,7 +30,12 @@ namespace SingleLinkedListProject
             list1.DisplayList();
             Console.Write("Second list - ");
             list2.DisplayList();
-            /*while (true)
+            */
+
+
+            var list = new SingleLinkedList();
+            list.CreateList();
+            while (true)
             {
                 Console.WriteLine("1. Display list");
                 Console.WriteLine("2. Count the number of nodes");
@@ -142,8 +148,10 @@ namespace SingleLinkedListProject
                         Console.Write("Wrong choice");
                         break;
                 }
+
                 Console.WriteLine();
-            }*/
+            }
+
             Console.WriteLine("Exiting");
             Console.ReadKey();
         }

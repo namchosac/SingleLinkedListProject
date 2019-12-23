@@ -387,30 +387,30 @@ namespace SingleLinkedListProject
             _start = MergeSortRec(_start);
         }
 
-        private Node MergeSortRec(Node listStart)
+        private static Node MergeSortRec(Node listStart)
         {
-            if (listStart == null || listStart.Link == null) //if list empty or has one element
+            if (listStart?.Link == null) //if list empty or has one element
                 return listStart;
 
             //if more than one element
-            Node start1 = listStart;
-            Node start2 = DivideList(listStart);
+            var start1 = listStart;
+            var start2 = DivideList(listStart);
             start1 = MergeSortRec(start1);
             start2 = MergeSortRec(start2);
-            Node startM = Merge2(start1, start2);
+            var startM = Merge2(start1, start2);
             return startM;
         }
 
-        private Node DivideList(Node p)
+        private static Node DivideList(Node p)
         {
-            Node q = p.Link.Link;
-            while (q != null && q.Link != null)
+            var q = p.Link.Link;
+            while (q?.Link != null)
             {
                 p = p.Link;
                 q = q.Link.Link;
             }
 
-            Node start2 = p.Link;
+            var start2 = p.Link;
             p.Link = null;
             return start2;
         }
