@@ -157,7 +157,7 @@ namespace SingleLinkedListProject
             // x is in first node, new node is inserted before first node
             if (x == _start.Info)
             {
-                temp = new Node(data) {Link = _start};
+                temp = new Node(data) { Link = _start };
                 _start = temp;
                 return;
             }
@@ -342,7 +342,7 @@ namespace SingleLinkedListProject
 
         public SingleLinkedList Merge2(SingleLinkedList list)
         {
-            var mergeList = new SingleLinkedList {_start = Merge2(_start, list._start)};
+            var mergeList = new SingleLinkedList { _start = Merge2(_start, list._start) };
             return mergeList;
         }
 
@@ -446,6 +446,38 @@ namespace SingleLinkedListProject
 
         public bool HasCycle()
         {
+            //Use Hashing
+            //var hasTable = new HashSet<Node>();
+            //var p = _start;
+            //while (p != null)
+            //{
+            //    if (hasTable.Contains(p))
+            //    {
+            //        return true;
+            //    }
+
+            //    hasTable.Add(p);
+            //    p = p.Link;
+            //}
+            //return false;
+
+            //Approach using Mark Visited Nodes
+            //var hasTable = new Hashtable();
+            //var p = _start;
+            //var iterator = 0;
+            //while (p != null)
+            //{
+            //    if (hasTable.Contains(iterator) && hasTable.ContainsValue(p))
+            //    {
+            //        return true;
+            //    }
+            //    hasTable.Add(iterator, p);
+            //    iterator++;
+            //    p = p.Link;
+            //}
+
+            //return false;
+            // Floyd’s Cycle-Finding Algorithm
             return FindCycle() != null;
         }
 
