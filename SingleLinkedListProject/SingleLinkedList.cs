@@ -446,7 +446,7 @@ namespace SingleLinkedListProject
 
         public bool HasCycle()
         {
-            //Use Hashing
+            // Use Hashing
             //var hasTable = new HashSet<Node>();
             //var p = _start;
             //while (p != null)
@@ -461,26 +461,13 @@ namespace SingleLinkedListProject
             //}
             //return false;
 
-            //Approach using Mark Visited Nodes
-            //var hasTable = new Hashtable();
-            //var p = _start;
-            //var iterator = 0;
-            //while (p != null)
-            //{
-            //    if (hasTable.Contains(iterator) && hasTable.ContainsValue(p))
-            //    {
-            //        return true;
-            //    }
-            //    hasTable.Add(iterator, p);
-            //    iterator++;
-            //    p = p.Link;
-            //}
+            // Approach using Mark Visited Nodes
 
-            //return false;
             // Floyd’s Cycle-Finding Algorithm
             return FindCycle() != null;
         }
 
+        // Floyd’s Cycle-Finding Algorithm
         private Node FindCycle()
         {
             if (_start?.Link == null)
