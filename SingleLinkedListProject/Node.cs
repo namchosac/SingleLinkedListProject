@@ -10,5 +10,9 @@
             Info = i;
             Link = null;
         }
+
+        public Node()
+        {
+        }
     }
 }
