@@ -157,7 +157,7 @@ namespace SingleLinkedListProject
             // x is in first node, new node is inserted before first node
             if (x == _start.Info)
             {
-                temp = new Node(data) { Link = _start };
+                temp = new Node(data) {Link = _start};
                 _start = temp;
                 return;
             }
@@ -342,7 +342,7 @@ namespace SingleLinkedListProject
 
         public SingleLinkedList Merge2(SingleLinkedList list)
         {
-            var mergeList = new SingleLinkedList { _start = Merge2(_start, list._start) };
+            var mergeList = new SingleLinkedList {_start = Merge2(_start, list._start)};
             return mergeList;
         }
 
@@ -461,10 +461,35 @@ namespace SingleLinkedListProject
             //}
             //return false;
 
-            // Approach using Mark Visited Nodes
+            // Marking visited nodes without modifying the linked list data structure
+            //return DetectLoop();
 
             // Floyd’s Cycle-Finding Algorithm
             return FindCycle() != null;
+        }
+
+        // Marking visited nodes without modifying the linked list data structure
+        public bool DetectLoop()
+        {
+            var p = _start;
+            var temp = new Node();
+            while (p != null)
+            {
+                if (p.Link == null)
+                {
+                    return false;
+                }
+
+                if (p.Link == temp || temp == _start)
+                {
+                    return true;
+                }
+
+                p.Link = temp;
+                p = p.Link;
+            }
+
+            return false;
         }
 
         // Floyd’s Cycle-Finding Algorithm
