@@ -129,7 +129,7 @@ namespace SingleLinkedListProject
                 p = p.Link;
             }
 
-            // Check p khong ton tai
+            // Check p not exist
             if (p == null)
                 Console.WriteLine($"{x} not present in the list");
 
@@ -202,13 +202,13 @@ namespace SingleLinkedListProject
             }
 
             var p = _start;
-            for (i = 1; i < k - 1 && p != null; i++) // find a refence to k-1 node
+            for (i = 1; i < k - 1 && p != null; i++) // find a reference to k-1 node
             {
                 p = p.Link;
             }
 
             if (p == null)
-                Console.WriteLine($"You can insert only upto {i} th position");
+                Console.WriteLine($"You can insert only up to {i} th position");
 
             else
             {
@@ -389,10 +389,10 @@ namespace SingleLinkedListProject
 
         private static Node MergeSortRec(Node listStart)
         {
-            if (listStart?.Link == null) //if list empty or has one element
+            if (listStart?.Link == null) // If list empty or has one element
                 return listStart;
 
-            //if more than one element
+            // If more than one element
             var start1 = listStart;
             var start2 = DivideList(listStart);
             start1 = MergeSortRec(start1);
